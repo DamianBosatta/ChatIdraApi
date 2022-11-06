@@ -5,6 +5,8 @@ using ChatTP.DTO.Response;
 using ChatTP.Models;
 using ChatTP.UnitOfWork;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
 
 namespace ChatTP.Services
 {
@@ -68,8 +70,34 @@ namespace ChatTP.Services
             return response;
 
         }
+       
+        public List<UserResponse> GetUsers()
+        {
+            List<User> users = new List<User>();
 
-   
+            foreach(User user in _uOW.UserRepository.GetAll())
+            {
+
+                if(user.conectado == true)
+                {
+
+                    users.Add(user);
+
+                }
+
+            }
+
+           
+
+            List<UserResponse> roomResponses = _mapper.Map<List<UserResponse>>(users).ToList();
+
+            return roomResponses;
+            
+
+
+        }
+
+
     }
 
 }

@@ -1,5 +1,6 @@
 ﻿using ChatTP.DTO.Request;
 using ChatTP.DTO.Response;
+using ChatTP.Models;
 using ChatTP.Services;
 using ChatTP.UnitOfWork;
 using Microsoft.AspNetCore.Mvc;
@@ -56,5 +57,22 @@ namespace ChatTP.Controllers
             return Ok(res);
 
         }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<UserResponse>>> GetUserOnLine() // devuelve todos los usuarios conectados
+        {
+            var listOnLine = _usuarioService.GetUsers().ToList();
+          
+            if (listOnLine== null)
+            {
+                return NotFound();
+            }
+
+           
+
+            return Ok(listOnLine);
+        }
+
+
     }
 }

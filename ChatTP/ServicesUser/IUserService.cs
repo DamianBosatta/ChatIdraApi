@@ -8,5 +8,6 @@ namespace ChatTP.Services
         UserResponse Register(RegisterRequest usuario);
         UserResponse Login(LoginRequest loginUser);
         UserResponse OffLogin(LoginRequest loginUser);
+        List<UserResponse> GetUsers();
     }
 }
